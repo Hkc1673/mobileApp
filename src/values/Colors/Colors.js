@@ -1,19 +1,25 @@
 export let myColors = {
-    mainDarkColor: "#310a75",
+    mainDarkColor: "#afc2cb",
 
-    mainLightColor: "#efe8fd",
+    mainLightColor: "#8bf6ff",
 
-    mainColor: "#925bf1",
+    mainColor: "#e1f5fe",
 
-    mainColorLight: '#efe8fd',
+    mainColorLight: '#ffffff',
+
+    secondaryColor: "#ec407a",
+
+    secondaryLightColor: "#ff77a9",
+
+    secondaryDarkColor: "#b4004e",
 
     errorColor: "#FF0000",
 
-    gradientColor1: '#efe8fd',
+    gradientColor1: '#8bf6ff',
 
-    gradientColor2: "#ad8af5",
+    gradientColor2: "#4fc3f7",
 
-    gradientColor3: '#6c2ced',
+    gradientColor3: '#0093c4',
 
     titleTextColor: "#050124",
 
@@ -26,4 +32,18 @@ export let myColors = {
     pageBGColor: "#fff",
 
     statusbarColor: "#730D96",
+
+    errorColor: '#911b1f',
+
+    infoColor: '#2866BF',
+
+    noticeColor: '#737373',
+
+    progressColor: '#2866BF',
+
+    successColor: "#009d7e",
+
+    warningColor: '#f29c00',
+
+    shadowColor: "#007860",
 }

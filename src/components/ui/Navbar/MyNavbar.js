@@ -36,7 +36,7 @@ export const MyNavbar = (props) => {
 
                     <FeatherIcon
                         style={{fontSize: hp(3.5)}}
-                        color={myColors.mainColor}
+                        color={myColors.secondaryLightColor}
                         name={'chevron-left'}/>
 
                 </TouchableOpacity>
@@ -48,7 +48,7 @@ export const MyNavbar = (props) => {
                         flex: 8,
                         fontSize: hp(2),
                         fontWeight: 'bold',
-                        color: myColors.mainColor,
+                        color: myColors.secondaryLightColor,
                         textAlign: 'center',
                         // textTransform: "uppercase"
                     }}>
@@ -56,7 +56,7 @@ export const MyNavbar = (props) => {
                     {title}
 
                 </Text>
-                {/* <TouchableOpacity
+                <TouchableOpacity
                     onPress={() => console.log("drawer")}
                     style={{
                         flex: 1.5,
@@ -66,12 +66,12 @@ export const MyNavbar = (props) => {
                         paddingVertical: 5,
                     }}>
 
-                    <FAIcon
+                    {/* <FAIcon
                         style={{fontSize: hp(3.5)}}
                         color={myColors.mainColor}
-                        name={'bars'}/>
+                        name={'bars'}/> */}
 
-                </TouchableOpacity> */}
+                </TouchableOpacity>
 
             </View>
 

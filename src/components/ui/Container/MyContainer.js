@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StatusBar,
@@ -7,14 +7,14 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {footerHeight} from '../../../values/Constants/Constants';
-import {MyStatusBar} from '../StatusBar/MyStatusBar';
-import {MyFooter} from '../Footer/MyFooter';
-import {MyNavbar} from '../Navbar/MyNavbar';
-import {myColors} from '../../../values/Colors/Colors';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {shadowStyle} from '../../../values/Styles/Styles';
-import {navigate} from '../../../RootMethods/RootNavigation';
+import { footerHeight } from '../../../values/Constants/Constants';
+import { MyStatusBar } from '../StatusBar/MyStatusBar';
+import { MyFooter } from '../Footer/MyFooter';
+import { MyNavbar } from '../Navbar/MyNavbar';
+import { myColors } from '../../../values/Colors/Colors';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { shadowStyle } from '../../../values/Styles/Styles';
+import { navigate } from '../../../RootMethods/RootNavigation';
 
 export const MyContainer = (props) => {
   let {
@@ -64,8 +64,8 @@ export const MyContainer = (props) => {
 
   return (
     <View
-      style={{flex: 1, backgroundColor: myColors.pageBGColor}}
-      // {...panResponder.panHandlers}
+      style={{ flex: 1, backgroundColor: myColors.pageBGColor }}
+    // {...panResponder.panHandlers}
     >
       {statusBar && (
         // app status bar
@@ -89,7 +89,7 @@ export const MyContainer = (props) => {
           paddingBottom: showFooter ? footerHeight + 40 : 0,
           ...style,
         }}>
-        <View style={{flex: 1, backgroundColor: myColors.mainColorLight}}>
+        <View style={{ flex: 1, backgroundColor: myColors.mainColorLight }}>
           <View
             style={{
               flex: 1,
@@ -119,9 +119,7 @@ export const MyContainer = (props) => {
           }}>
           {/* button view */}
           <TouchableOpacity
-            onPress={() => {
-                navigate('QuickScreen');
-            }}
+            onPress={() => {navigate("AddScreen")}}
             style={{
               backgroundColor: myColors.mainColorLight,
               width: hp(8),
@@ -136,7 +134,7 @@ export const MyContainer = (props) => {
             }}>
             {/* button icon */}
             <FeatherIcon
-              style={{fontSize: hp(5), color: myColors.mainColor}}
+              style={{ fontSize: hp(5), color: myColors.mainLightColor }}
               name="plus"
             />
           </TouchableOpacity>

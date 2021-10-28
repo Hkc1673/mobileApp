@@ -17,8 +17,6 @@ const HomeScreen = () => {
     const post = useSelector(postsSelector);
     const loading = useSelector(postLoadingSelector);
 
-    console.log("POST", post)
-    console.log("POST")
 
     useEffect(() => {
         getData()

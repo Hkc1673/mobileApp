@@ -97,3 +97,9 @@ export const AlertStyles = {
         color: myColors.titleTextColor,
     },
 }
+
+export const pageContainerStyle = {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    flex: 1
+};

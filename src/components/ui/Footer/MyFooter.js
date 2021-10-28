@@ -56,7 +56,7 @@ export const MyFooter = (props) => {
 
                     {/* profile button*/}
                     <TouchableOpacity
-                        onPress={() => {navigate("ProfileScreen")}}
+                        onPress={() => {navigate("AddScreen")}}
                         style={styles.buttonView}>
 
                         <FAIcon
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     buttonIcon: {
         fontSize: hp(3),
-        color: myColors.mainColor
+        color: myColors.mainLightColor
     },
     buttonText: {
         color: "white",
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     },
     buttonActiveIcon: {
         fontSize: hp(3.5),
-        color: "#ed8c2c",
+        color: myColors.secondaryColor,
         shadowColor: "#c32d73",
         shadowOffset: {
             width: 0,
