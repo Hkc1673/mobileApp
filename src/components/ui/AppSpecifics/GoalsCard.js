@@ -11,6 +11,7 @@ import {
     listsSelector,
     loadingSelector,
 } from '../../../stores/deleteList/deleteListSlice';
+import { updateList } from "../../../stores/updateList/updateSlice"
 import InputCard from "../AppSpecifics/InputCard"
 
 const GoalsCard = (props) => {
@@ -38,6 +39,8 @@ const GoalsCard = (props) => {
 
     const onSaved = (title, describe, pomodoro, category) => {
         console.log("DATA", { title, describe, pomodoro, category })
+        dispatch(updateList({ title, describe, pomodoro, category, id: _id }));
+        toggleOverlay();
     }
 
     return (
@@ -62,7 +65,9 @@ const GoalsCard = (props) => {
                                 <Icon name="laptop" color="#2daaa6" size={50} />
                                 : category === "Daily" ?
                                     <Icon name="coffee" color="#0f1111" size={50} />
-                                    : <Icon name="book" color="green" size={50} />
+                                    : category === "Sport" ?
+                                        <Icon name="hiking" color="#867b70" size={50} />
+                                        : <Icon name="book" color="green" size={50} />
                     }
                 </View>
                 <View style={{ flex: 3, margin: hp(0.5), }}>
@@ -127,20 +132,20 @@ const GoalsCard = (props) => {
                                     name="trash-alt"
                                     size={15}
                                     color="white"
-                                    style={{marginLeft:15}}
+                                    style={{ marginLeft: 15 }}
                                 />
                             }
                             iconRight
                             title="Delete Goal"
                             onPress={() => getData(_id)}
-                            />
+                        />
                         <Button
                             icon={
                                 <Icon
                                     name="edit"
                                     size={15}
                                     color="white"
-                                    style={{marginLeft:15}}
+                                    style={{ marginLeft: 15 }}
                                 />
                             }
                             iconRight
