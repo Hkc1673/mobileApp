@@ -5,18 +5,41 @@ import { myColors } from '../../../values/Colors/Colors'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Button, Overlay } from 'react-native-elements';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    deleteList,
+    listsSelector,
+    loadingSelector,
+} from '../../../stores/deleteList/deleteListSlice';
+import InputCard from "../AppSpecifics/InputCard"
 
 const GoalsCard = (props) => {
+
+    const dispatch = useDispatch();
+    const list = useSelector(listsSelector);
+    const loading = useSelector(loadingSelector);
 
     const { completed, createdAt, describe, pomodoro, title, category, _id } = props?.data
 
     const newDate = moment(createdAt).format("DD-MM-YYYY")
 
     const [visible, setVisible] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
 
     const toggleOverlay = () => {
         setVisible(!visible);
+        setOpenEdit(false)
     };
+
+    const getData = (id) => {
+        dispatch(deleteList({ id }));
+        toggleOverlay();
+    }
+
+    const onSaved = (title, describe, pomodoro, category) => {
+        console.log("DATA", { title, describe, pomodoro, category })
+    }
+
     return (
         <View style={{
             borderWidth: 1,
@@ -88,8 +111,47 @@ const GoalsCard = (props) => {
                 <Text>{newDate}</Text>
             </View>
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-                <Text>Hello from Overlay!</Text>
-                <Text>{_id}</Text>
+                {
+                    !openEdit &&
+                    <View style={{ width: wp(50), height: hp(25), justifyContent: "space-around" }}>
+                        <Text style={{
+                            color: myColors.titleTextColor,
+                            fontWeight: "bold",
+                            letterSpacing: 1,
+                        }}>
+                            {title}
+                        </Text>
+                        <Button
+                            icon={
+                                <Icon
+                                    name="trash-alt"
+                                    size={15}
+                                    color="white"
+                                    style={{marginLeft:15}}
+                                />
+                            }
+                            iconRight
+                            title="Delete Goal"
+                            onPress={() => getData(_id)}
+                            />
+                        <Button
+                            icon={
+                                <Icon
+                                    name="edit"
+                                    size={15}
+                                    color="white"
+                                    style={{marginLeft:15}}
+                                />
+                            }
+                            iconRight
+                            title="Edit Goal"
+                            onPress={() => setOpenEdit(!openEdit)} />
+                    </View>
+                }
+
+                {
+                    openEdit && <InputCard onSaved={onSaved} data={props?.data} />
+                }
             </Overlay>
         </View>
     )

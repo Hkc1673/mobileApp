@@ -28,7 +28,8 @@ export const MyInput = (props) => {
         shadow,
         type,
         rightIconOnPress,
-        leftIconOnPress
+        leftIconOnPress,
+        defaultValue
     } = props;
 
 
@@ -117,6 +118,7 @@ export const MyInput = (props) => {
                 keyboardType={keyboardType}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
+                defaultValue={defaultValue}
                 style={{
                     flex: rightIcon ? 14 : 17,
                     padding: 10,
@@ -209,6 +211,7 @@ MyInput.propTypes = {
     autoCapitalize: PropTypes.bool,
     shadow: PropTypes.bool,
     type: PropTypes.oneOf(['default', 'small']),
+    defaultValue:PropTypes.string
 };
 
 // input default props
