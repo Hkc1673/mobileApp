@@ -103,3 +103,32 @@ export const pageContainerStyle = {
     paddingTop: 10,
     flex: 1
 };
+
+export const inputStyle = ({
+    container: {
+        marginVertical: 5
+    },
+    titleText: {
+        marginTop: 3,
+        fontSize: hp("1.8%"),
+        fontWeight: "600",
+        fontStyle: "normal",
+        letterSpacing: 0,
+        textAlign: "left",
+        color: myColors.titleTextColor,
+    },
+    inputText: {
+        color: "#aeaeae",
+    },
+    picker: {
+        marginVertical: 5,
+        borderStyle: "solid",
+        borderWidth: 1.5,
+        borderColor: myColors.mainColor,
+        backgroundColor: "white",
+        borderRadius: 5,
+        height: hp(5.5),
+        justifyContent: 'center',
+        ...shadowStyle
+    }
+})

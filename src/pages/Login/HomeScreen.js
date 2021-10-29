@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { FlatList, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     GetPosts,
@@ -17,6 +17,8 @@ const HomeScreen = () => {
     const post = useSelector(postsSelector);
     const loading = useSelector(postLoadingSelector);
 
+    const [refreshing, setRefreshing] = useState(false);
+
 
     useEffect(() => {
         getData()
@@ -28,11 +30,20 @@ const HomeScreen = () => {
         dispatch(GetPosts({ id }));
     }
 
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        getData();
+        setRefreshing(false);
+      }, []);
+
     return (
         <MyContainer title={"Main Page"} footerActiveIndex={0}>
             <FlatList
                 nestedScrollEnabled={true}
                 showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                  }
                 keyExtractor={(item, index) => index.toString()}
                 data={post}
                 renderItem={({ item, index }) => (

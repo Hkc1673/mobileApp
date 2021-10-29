@@ -1,25 +1,64 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native';
-import {
-    heightPercentageToDP as hp,
-    widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Picker } from '@react-native-picker/picker';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    createList,
+    listsSelector,
+    loadingSelector,
+} from '../../../stores/addList/addListSlice';
 
-import { myColors } from '../../../values/Colors/Colors';
 import { MyContainer } from '../../../components/ui/Container/MyContainer'
-import { pageContainerStyle, shadowStyle } from "../../../values/Styles/Styles";
+import { pageContainerStyle, inputStyle } from "../../../values/Styles/Styles";
 import { MyInput } from '../../../components/ui/Common/Input/MyInput';
 import { MyButton } from '../../../components/ui/Common/Button/MyButton';
-import { goBack } from '../../../RootMethods/RootNavigation';
+import { navigate } from '../../../RootMethods/RootNavigation';
+import { User } from '../../../user/User';
+import { Loading } from '../../../components/global/Loading';
+import AlertModal from '../../../components/global/Alert';
 
 const AddScreen = () => {
 
+    const dispatch = useDispatch();
+    const list = useSelector(listsSelector);
+    const loading = useSelector(loadingSelector);
+    
     const [title, onChangeTitle] = useState("")
     const [describe, onChangeDescribe] = useState("")
     const [pomodoro, onChangePomodoro] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("");
+
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState({ title: "", message: "" })
+
+    console.log("Lİst", list)
+
+    useEffect(() => {
+        if (!loading && list?.success) {
+            setShowAlert(true)
+            setAlertMessage({
+                title: "Success",
+                message: "Created new goal"
+            })
+        }
+    }, [list])
+
+    const getData = async () => {
+        let user = new User();
+        const userId = await user.getUserId();
+        dispatch(createList({
+            userId,
+            title,
+            describe,
+            pomodoro,
+            category: selectedCategory
+        }));
+    }
+
+    const hideAlert = () => {
+        setShowAlert(false)
+    }
 
     return (
         <MyContainer title="Add Goals">
@@ -118,46 +157,33 @@ const AddScreen = () => {
                     </View>
                 </View>
                 <MyButton
-                    onPress={() => goBack()}
+                    onPress={() => getData()}
                     containerStyle={{ flex: 1, marginLeft: 5, marginRight: 0 }}
                     shadow={true}
                     stickyIcon={true}
                     rightIcon={"check"}
-                    buttonText="Save" />
+                    buttonText="Save"
+                />
+                {
+                    loading && <Loading />
+                }
 
             </KeyboardAwareScrollView>
+            {showAlert &&
+                <AlertModal
+                    title={alertMessage.title}
+                    message={alertMessage.message}
+                    show={showAlert}
+                    onCancelPressed={() => {
+                        hideAlert();
+                    }}
+                    onConfirmPressed={() => {
+                        hideAlert();
+                    }} />
+            }
         </MyContainer>
-
     )
 }
 
 export default AddScreen
 
-const inputStyle = ({
-    container: {
-        marginVertical: 5
-    },
-    titleText: {
-        marginTop: 3,
-        fontSize: hp("1.8%"),
-        fontWeight: "600",
-        fontStyle: "normal",
-        letterSpacing: 0,
-        textAlign: "left",
-        color: myColors.titleTextColor,
-    },
-    inputText: {
-        color: "#aeaeae",
-    },
-    picker: {
-        marginVertical: 5,
-        borderStyle: "solid",
-        borderWidth: 1.5,
-        borderColor: myColors.mainColor,
-        backgroundColor: "white",
-        borderRadius: 5,
-        height: hp(5.5),
-        justifyContent: 'center',
-        ...shadowStyle
-    }
-})

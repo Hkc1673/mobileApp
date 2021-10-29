@@ -179,7 +179,8 @@ const SignInScreen = ({ route, navigation }) => {
             {showAlert &&
                 <AlertModal title="Error"
                     message="Hatalı parola veya e-mail"
-                    show={showAlert} onCancelPressed={() => {
+                    show={showAlert} 
+                    onCancelPressed={() => {
                         hideAlert();
                     }}
                     onConfirmPressed={() => {
