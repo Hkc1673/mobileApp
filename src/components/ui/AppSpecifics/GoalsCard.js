@@ -13,6 +13,7 @@ import {
 } from '../../../stores/deleteList/deleteListSlice';
 import { updateList } from "../../../stores/updateList/updateSlice"
 import InputCard from "../AppSpecifics/InputCard"
+import { navigate } from '../../../RootMethods/RootNavigation';
 
 const GoalsCard = (props) => {
 
@@ -129,6 +130,19 @@ const GoalsCard = (props) => {
                         <Button
                             icon={
                                 <Icon
+                                    name="hourglass-start"
+                                    size={15}
+                                    color="white"
+                                    style={{ marginLeft: 15 }}
+                                />
+                            }
+                            iconRight
+                            title="Start Study"
+                            onPress={() => navigate("TimeScreen")}
+                        />
+                        <Button
+                            icon={
+                                <Icon
                                     name="trash-alt"
                                     size={15}
                                     color="white"
@@ -150,7 +164,10 @@ const GoalsCard = (props) => {
                             }
                             iconRight
                             title="Edit Goal"
-                            onPress={() => setOpenEdit(!openEdit)} />
+                            onPress={() => setOpenEdit(!openEdit)}
+                        />
+
+
                     </View>
                 }
 

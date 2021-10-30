@@ -13,6 +13,7 @@ import ForgetPasswordScreen from '../NotLogin/ForgetPasswordScreen';
 
 import HomeScreen from '../Login/HomeScreen';
 import AddScreen from '../Login/AddScreen/AddScreen';
+import TimeScreen from '../Login/AddScreen/TimeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ const Router = () => {
                 <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HomeScreen">
                     <Stack.Screen name="HomeScreen" component={HomeScreen} />
                     <Stack.Screen name="AddScreen" component={AddScreen} />
+                    <Stack.Screen name="TimeScreen" component={TimeScreen} />
                 </Stack.Navigator>
                 : <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SplashScreen">
                     <Stack.Screen name="SplashScreen" component={SplashScreen} />
