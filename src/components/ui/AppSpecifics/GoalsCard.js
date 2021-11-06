@@ -14,6 +14,7 @@ import {
 import { updateList } from "../../../stores/updateList/updateSlice"
 import InputCard from "../AppSpecifics/InputCard"
 import { navigate } from '../../../RootMethods/RootNavigation';
+import PomodoroCard from './PomodoroCard';
 
 const GoalsCard = (props) => {
 
@@ -27,10 +28,12 @@ const GoalsCard = (props) => {
 
     const [visible, setVisible] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
+    const [openPomodoro, setOpenPomodoro] = useState(false)
 
     const toggleOverlay = () => {
         setVisible(!visible);
         setOpenEdit(false)
+        setOpenPomodoro(false)
     };
 
     const getData = (id) => {
@@ -39,8 +42,12 @@ const GoalsCard = (props) => {
     }
 
     const onSaved = (title, describe, pomodoro, category) => {
-        console.log("DATA", { title, describe, pomodoro, category })
         dispatch(updateList({ title, describe, pomodoro, category, id: _id }));
+        toggleOverlay();
+    }
+
+    const onPomodoro = (_pomodoro) => {
+        navigate("TimeScreen", _pomodoro)
         toggleOverlay();
     }
 
@@ -118,7 +125,7 @@ const GoalsCard = (props) => {
             </View>
             <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
                 {
-                    !openEdit &&
+                    !openEdit && !openPomodoro &&
                     <View style={{ width: wp(50), height: hp(25), justifyContent: "space-around" }}>
                         <Text style={{
                             color: myColors.titleTextColor,
@@ -138,7 +145,7 @@ const GoalsCard = (props) => {
                             }
                             iconRight
                             title="Start Study"
-                            onPress={() => navigate("TimeScreen")}
+                            onPress={() => setOpenPomodoro(!openPomodoro)}
                         />
                         <Button
                             icon={
@@ -173,6 +180,9 @@ const GoalsCard = (props) => {
 
                 {
                     openEdit && <InputCard onSaved={onSaved} data={props?.data} />
+                }
+                {
+                    openPomodoro && <PomodoroCard onPomodoro={onPomodoro} />
                 }
             </Overlay>
         </View>

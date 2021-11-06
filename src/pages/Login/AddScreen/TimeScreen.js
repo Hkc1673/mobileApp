@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Animated } from "react-native"
 import { MyContainer } from "../../../components/ui/Container/MyContainer";
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import Sound from 'react-native-sound';
 import alarm from "../../../assets/music/alarm.mp3"
+import BreakTimeCard from "../../../components/ui/AppSpecifics/BreakTimeCard";
 
 const minuteSeconds = 60;
 const hourSeconds = 3600;
@@ -38,12 +39,23 @@ var ding = new Sound(alarm, Sound.MAIN_BUNDLE, (error) => {
     console.log('duration in seconds: ' + ding.getDuration() + 'number of channels: ' + ding.getNumberOfChannels());
 });
 
-const TimeScreen = () => {
+const TimeScreen = (props) => {
+
+    const _pomodoroTime = Number(props?.route?.params)
+
+    const [openLayout, setOpenLayout] = useState(false)
+    const [_pmdr, setPmdr] = useState("")
+
+    const onPomodoro = (_pomodoro) => {
+        setPmdr(_pomodoro)
+        setOpenLayout(false)
+    }
 
     const playPause = () => {
         ding.play(success => {
             if (success) {
                 console.log('successfully finished playing');
+                setOpenLayout(true)
             } else {
                 console.log('playback failed due to audio decoding errors');
             }
@@ -80,6 +92,9 @@ const TimeScreen = () => {
                     }
                 </CountdownCircleTimer>
             </View>
+            {
+                openLayout && <BreakTimeCard onPomodoro={onPomodoro} />
+            }
 
         </MyContainer>
     );
