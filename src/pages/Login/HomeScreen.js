@@ -19,6 +19,8 @@ const HomeScreen = () => {
 
     const [refreshing, setRefreshing] = useState(false);
 
+    console.log("Test Commit")
+
 
     useEffect(() => {
         getData()
